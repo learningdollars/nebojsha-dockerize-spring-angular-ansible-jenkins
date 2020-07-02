@@ -1,1 +1,2 @@
-# nebojsha-dockerize-spring-angular-ansible-jenkins
+# Dockerize, deploy with Ansible and test your Spring+Angular web application with Jenkins
+This project offers new learners to find a way on how to easily prepare their Spring Boot or Angular application for deployment, it will teach them how to configure jenkins, how to configure NGINX and how to use Ansible to make an easy deployment on a new server if they ever need to (or update the version on the existing server with just building the production apps with few commands in the command line). 
