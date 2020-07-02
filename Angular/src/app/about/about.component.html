@@ -1,0 +1,29 @@
+<div class="jumbotron JumboHeaderImg3" style="height: 500px;">
+  <div class="container">
+    <br><br><br>
+    <h1 class="display-3 text-light">What is F1?</h1><br>
+    <p class="text-light">Here you can find short description about Formula 1<br /> For more info you can visit F1
+      Official Website...</p><br><br>
+    <br><br>
+  </div>
+</div>
+
+<main role="main" class="container">
+  <main>
+
+
+
+    <section class="jumbotron text-left ">
+      <div class="container">
+        <div class="col-md-12 ">
+          <h1 *ngIf="f1URI" class="text-center"><a [href]="f1URI" target="_blank"> About Formula One</a></h1>
+          <p class="lead text-muted mt-5" style="font-size: medium; text-align: justify;" *ngIf="abstract">{{abstract}}
+          </p>
+          <br>
+          <div class="text-center">
+            <a href="https://www.formula1.com/" type="button" class="btn btn-primary btn-lg">Visit Official Website <i
+                class="fas fa-angle-double-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>

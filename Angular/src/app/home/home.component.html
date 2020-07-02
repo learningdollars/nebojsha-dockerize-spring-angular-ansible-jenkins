@@ -1,0 +1,65 @@
+<div class="jumbotron JumboHeaderImg">
+  <div class="container">
+    <br><br><br>
+    <h1 class="display-3 text-light">Welcome to Formula 1</h1><br>
+    <p class="text-light">Enter the world of Formula 1. Your go-to source for the latest F1 news, video highlights,
+      <br />GP results, live timing, in-depth analysis and expert commentary.</p><br><br>
+    <br>
+    <p><a class="btn btn-primary btn-lg" href="https://www.formula1.com/" role="button">Visit Official Website &nbsp;<i
+          class="fas fa-angle-double-right"></i></a></p>
+    <br><br><br>
+  </div>
+</div>
+
+<main role="main" class="container">
+  <div id="dr_heading" class="my-3 p-3 bg-white rounded shadow-sm" style="background-color: #e9ecef !important;">
+    <h3 class="pb-2 mb-0"><i class="fas fa-flag-checkered" style="color: red;"></i> F1 Drivers </h3>
+  </div>
+</main>
+
+
+
+<!-- <img src="https://techtj.com/wp-content/uploads/2019/11/The-watch-F1-live-stream-every-2019-Grand-Prix-online-from-anywhere.jpg" class="img-fluid" alt="Responsive image"> -->
+<div *ngIf="drivers && drivers.length>0">
+  <div class="container">
+    <div class="row">
+
+
+
+      <div *ngFor="let driver of drivers">
+        <div class="col-md-6 offset-md-3">
+          <app-driver-card [driverObject]="driver"></app-driver-card>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<div class="jumbotron JumboHeaderImg1" style="height: 600px;">
+</div>
+
+
+
+
+<main role="main" class="container">
+  <div id="tm_heading" class="my-3 p-3 bg-white rounded shadow-sm" style="background-color: #e9ecef !important;">
+    <h3 class="pb-2 mb-0"> <i class="fas fa-users" style="color: red;"></i> F1 Teams </h3>
+  </div>
+</main>
+
+<div *ngIf="teams && teams.length > 0">
+  <div class="container mb-5">
+    <div class="row">
+
+
+      <div *ngFor="let team of teams">
+        <div class="col-md-6 offset-md-3">
+          <app-team-card [teamObject]="team"></app-team-card>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

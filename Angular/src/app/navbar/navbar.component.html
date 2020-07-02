@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img style="width: 17vh;" src="../../assets/f1-logo.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item ml-4">
+          <a class="nav-link" [routerLink]="['/']" queryParamsHandling="merge">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/drivers']" queryParamsHandling="merge">Drivers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/teams']" queryParamsHandling="merge">Teams</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/about']" queryParamsHandling="merge">About</a>
+        </li>
+      </ul>
+
+    </div>
+    <form class="form-inline">
+      <span class="flag-icon  flag-icon-gb" (click)="onChangeLanguage('en')"></span>
+      <span class="flag-icon  flag-icon-fr ml-2" (click)="onChangeLanguage('fr')"></span>
+      <span class="flag-icon  flag-icon-es ml-2" (click)="onChangeLanguage('es')"></span>
+    </form>
+  </div>
+</nav>

@@ -1,0 +1,46 @@
+version: '3'
+
+networks:
+  f1_app:
+    
+services:
+    f1-backend:
+        image: "todorovikj/f1_backend"
+        ports:
+            - "8080:8080"
+        volumes:
+            - "./Backend_gradle/build/libs:/home/myApp"
+        networks:
+            - f1_app
+
+    f1-angular:
+        image: "todorovikj/angular_app_container"
+        ports:
+            - "4200:4200"
+        volumes:
+            - "./Angular/nginx/:/etc/nginx/conf.d:ro"
+            - "./Angular/dist/Angular:/usr/share/nginx/html:ro"
+        networks:
+            - f1_app
+
+    jenkins:
+        image: "todorovikj/jenkins"
+        ports:
+            - "50000:50000"
+            - "8000:8080"
+        volumes:
+            - "/var/jenkins_home:/var/jenkins_home"
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        environment:
+            - JENKINS_OPTS="--prefix=/jenkins"
+        networks:
+            - f1_app
+
+    nginx:
+        image: todorovikj/nginx-global
+        ports:
+            - "80:80"
+        volumes:
+            - "./nginx-global/:/etc/nginx/conf.d:ro"
+        networks:
+            - f1_app

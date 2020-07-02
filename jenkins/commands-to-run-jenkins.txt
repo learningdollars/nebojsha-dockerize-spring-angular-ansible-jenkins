@@ -1,0 +1,55 @@
+$ sudo mkdir -p /var/jenkins_home
+$ cd /var/jenkins_home
+$ sudo chown -R 1000 /var/jenkins_home
+
+
+$ sudo docker build -t jamtur01/jenkins .    
+Build the image
+
+
+sudo docker run -d -p 8000:8080 -p 50000:50000 \
+-v /var/jenkins_home:/var/jenkins_home \
+-v /var/run/docker.sock:/var/run/docker.sock \
+--name jenkins \
+todorovikj/jenkins
+
+
+Jenkins conf to be made on the page:
+
+Source Code Management : git and link to repo (here you will need to update for the branches, when you will display the tests)
+
+Build: invoke gradle script : use gradle wrapper: 
+1) Wrapper location: ${workspace}/Backend_gradle
+
+2) task: test
+
+3) Advanced: root build script: ${workspace}/Backend_gradle
+
+
+I set up git to send notifications to Jenkins on every push ... steps: 
+
+In jenkins under Build triggers tick : GitHub hook trigger for GITScm polling and for branch in source code management leave blank (so it works for every branch)
+
+On git I went to the repo then settings and under Webhooks
+payload url: http://nebojsha.eastus.cloudapp.azure.com:8000/github-webhook/
+content type: application Json
+just push event and save.
+
+
+Display pipeline results on Git:
+github -> profile -> settings -> Developer settings -> personal access tokens -> generate new with all permissions
+jenkins -> install post build job -> restart jenkins 
+
+Then post build actions add post build task:
+Task 1 : 
+ write Success for for Log text and script to execute is:
+  curl "https://api.GitHub.com/repos/Todorovikj/AnIS/statuses/$GIT_COMMIT?access_token=$ENTER_YOUR_GIT_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -X POST \
+  -d "{\"state\": \"failure\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\":\
+  \"http://nebojsha.eastus.cloudapp.azure.com:8000/job/AnIs-F1-tests/$BUILD_NUMBER/console\"}"
+
+Task 2 :
+Same as Task1 but you write state failure
+
+

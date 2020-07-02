@@ -1,0 +1,34 @@
+<div class="card mb-4 mt-4" style="width: 18rem; min-height: 650px;">
+  <span *ngIf="teamObject.picture" style="min-height: 220px;">
+    <img style="overflow: hidden;" class="card-img-top" src="{{ teamObject.picture['value'] }}" alt="Picture of team" />
+  </span>
+  <span *ngIf="!teamObject.picture" style="min-height: 220px;">
+    <img style="overflow: hidden;" class="card-img-top"
+      src="https://www.raconteur.net/wp-content/uploads/2018/04/shutterstock_762930772.jpg" alt="Picture of team" />
+  </span>
+
+  <div class="card-body">
+    <span *ngIf="teamObject.name">
+      <h5 class="card-title" style="min-height: 50px;">{{ teamObject.name["value"] }}</h5>
+    </span>
+
+    <span *ngIf="teamObject.description && !this.showMore">
+      <p id="content" class="card-text">{{ teamObject.description["value"].substring(0,150) }} ...</p>
+      <p class="text-primary" style="cursor: pointer;" (click)="setShowMore(true)">Show More</p>
+    </span>
+
+    <span *ngIf="teamObject.description && this.showMore">
+      <p class="card-text">{{ teamObject.description["value"] }}</p>
+      <p class="text-primary" style="cursor: pointer;" (click)="setShowMore(false)">Show Less</p>
+    </span>
+    <br>
+    <span *ngIf="teamObject.wins">
+      <p class="card-text"><b>Wins: {{ teamObject.wins["value"] }}</b></p>
+    </span>
+
+    <span *ngIf="teamObject.webLink">
+      <a class="btn btn-primary mt-3" [href]="teamObject.webLink['value']" target="_blank">Team Website <i
+          class="fas fa-globe"></i></a>
+    </span>
+  </div>
+</div>

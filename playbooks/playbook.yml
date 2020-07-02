@@ -1,0 +1,75 @@
+---
+- name: Install required packages
+  hosts: azure-server
+  become: true
+  tasks:
+    - name: install docker
+      apt: name=docker update_cache=true
+
+    - name: install docker-compose
+      get_url:
+       url: "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-{{ansible_system}}-{{ansible_architecture}}"
+       dest: /usr/local/bin/docker-compose
+       mode: 0777
+
+
+- name: Copy project files
+  hosts: azure-server
+  become: true
+  tasks:
+
+    - name: Create project directory
+      file:
+        path: /home/AnIS
+        state: directory
+
+    - name: Copy docker-compose
+      copy:
+        src: "./../docker-compose.yml"
+        dest: "/home/AnIS/docker-compose.yml"
+        mode: 0777
+
+    - name: Copy back-end jar
+      copy:
+        src: "./../Backend_gradle/build/libs/"
+        dest: "/home/AnIS/Backend_gradle/build/libs/"
+        mode: 0777
+
+    - name: Copy angular build files
+      copy:
+        src: "./../Angular/dist/Angular/"
+        dest: "/home/AnIS/Angular/dist/Angular/"
+        mode: 0777
+
+    - name: Copy angular nginx files
+      copy:
+        src: "./../Angular/nginx/"
+        dest: "/home/AnIS/Angular/nginx/"
+        mode: 0777
+
+    - name: Copy global nginx files
+      copy:
+        src: "./../nginx-global/"
+        dest: "/home/AnIS/nginx-global/"
+        mode: 0777
+
+- name: Setup jenkins directories
+  hosts: azure-server
+  become: true
+  tasks:
+
+    - name: Create jenkins_home directory
+      file:
+        path: /var/jenkins_home
+        state: directory
+        mode: 1000
+
+- name: Restart docker-compose containers
+  hosts: azure-server
+  become: true
+  tasks:
+    - name: Stop docker compose
+      command: chdir=/home/AnIS docker-compose stop
+
+    - name: Start docker compose
+      command: chdir=/home/AnIS docker-compose up -d

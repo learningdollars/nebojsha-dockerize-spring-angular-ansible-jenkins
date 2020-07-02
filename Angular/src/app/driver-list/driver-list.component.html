@@ -1,0 +1,38 @@
+<section class="jumbotron text-left ">
+  <div class="container">
+    <div class="col-md-12 ">
+      <h1><br />Search Formula 1 Drivers</h1>
+      <p class="lead text-muted">Formula One is the highest class of single-seater auto racing sanctioned by the
+        Fédération Internationale de l'Automobile and owned by the Formula One Group.</p>
+      <div>
+        <form class="form-inline" (submit)="search()">
+          <input class="form-control mr-sm-2 " type="text" placeholder="Search by name" aria-label="Search"
+            [(ngModel)]="searchText" name="searchText" required />
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div *ngIf="drivers && drivers.length>0">
+  <div class="container">
+    <div class="row">
+
+
+      <div *ngFor="let driver of drivers">
+        <div class="col-md-6 offset-md-3">
+          <app-driver-card [driverObject]="driver"></app-driver-card>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="drivers && drivers.length === 0 && searchText" class="container">
+  <h3>We could not provide any results with the information provided...</h3>
+</div>

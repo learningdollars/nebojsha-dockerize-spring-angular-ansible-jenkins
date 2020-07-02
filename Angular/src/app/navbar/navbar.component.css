@@ -1,0 +1,12 @@
+.flag-icon {
+    font-size: 17pt;
+
+}
+
+.flag-icon:hover {
+    cursor: pointer;
+  }
+
+  .nav-link {
+    font-size: 13pt;
+  }

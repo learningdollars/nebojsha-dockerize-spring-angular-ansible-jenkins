@@ -1,0 +1,47 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+    id 'org.springframework.boot' version '2.2.7.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'groovy'
+}
+
+group = 'com.example'
+version = '2.0'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-groovy-templates'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+    compile group: 'org.springframework.boot', name: 'spring-boot-test-autoconfigure', version: '2.2.7.RELEASE'
+
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+    testImplementation group: 'org.spockframework', name: 'spock-spring', version: '1.1-groovy-2.4'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured'
+    testImplementation group: 'io.rest-assured', name: 'json-schema-validator'
+}
+
+tasks.withType(Test){
+    testLogging {
+        events TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED
+        afterSuite {
+            desc, result ->
+                if(!desc.parent){
+                    def output = "RESULTS: ${result.resultType}, (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
+                    def startItem = '| ', endItem ='  |'
+                    def repeatLength = startItem.length()+output.length()+ endItem.length()
+                    println('\n'+('-' * repeatLength)+'\n'+startItem+output+endItem+'\n'+('-'*repeatLength))
+                }
+        }
+    }
+    reports.html.setDestination(file("${projectDir.parent}/test-reports/${name}/${project.name}"))
+}

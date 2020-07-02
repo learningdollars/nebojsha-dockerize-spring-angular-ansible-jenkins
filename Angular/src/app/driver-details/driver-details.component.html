@@ -1,0 +1,168 @@
+<div class="container marketing">
+  <br><br><br><br><br>
+  <div *ngIf="driverObject">
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <span *ngIf="driverObject.name">
+          <h3 class="featurette-heading">{{driverObject.name['value']}}</h3>
+        </span>
+        <span *ngIf="driverObject.birthDate">
+          <p class="font-weight-bold">Birth date: {{driverObject.birthDate['value']}}</p>
+        </span>
+        <span *ngIf="driverObject.deathDate">
+          <p class="font-weight-bold">Death date: {{driverObject.deathDate['value']}}</p>
+        </span>
+        <span class="font-weight-bold" *ngIf="driverObject.birthPlace">Birth place:
+          <a [href]="driverObject.birthPlace['value']" target="_blank">
+            {{driverObject.birthPlace['value']
+          .substring(driverObject.birthPlace['value'].lastIndexOf('/')+1)}}
+          </a></span>
+        <br>
+        <span *ngIf="driverObject.comment">
+          <p>{{driverObject.comment['value']}}</p>
+        </span>
+        <span *ngIf="driverObject.nationality">
+          <p class="font-weight-bold">Nationality: {{driverObject.nationality['value']}}</p>
+        </span>
+        <span *ngIf="driverObject.quote">
+          <p class="font-italic font-weight-bold">Quote: {{driverObject.quote['value']}}</p>
+        </span>
+
+
+      </div>
+      <div class="col-md-5 order-md-1">
+        <div class="text-center">
+          <a *ngIf="driverObject.thumbnail" [href]="driverObject.thumbnail['value']"><img class="rounded"
+              src="{{driverObject.thumbnail['value']}}" alt="Picture of driver" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<main role="main" class="container">
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <span *ngIf="driverObject.abstract">
+      <p class="lead medium" style="text-align: justify; font-size: medium;">{{driverObject.abstract['value']}}</p>
+    </span>
+    <h3 class=" pb-2 mb-0 mt-5">More Information</h3>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"> <span *ngIf="driverObject.podiums">
+            <p>Number of podiums: {{driverObject.podiums['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.wins">
+            <p>Number of wins: {{driverObject.wins['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.points">
+            <p>Points: {{driverObject.points['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.numChampionships">
+            <p>Number of championships: {{driverObject.numChampionships['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.fastestLap">
+            <p>Fastest lap: {{driverObject.fastestLap['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+
+
+
+
+
+
+
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.numPodiums">
+            <p>Number of podiums: {{driverObject.numPodiums['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.numRaces">
+            <p>Number of races: {{driverObject.numRaces['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.numPoles">
+            <p>Number of poles: {{driverObject.numPoles['value']}}</p>
+          </span></strong>
+      </p>
+    </div>
+
+
+
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.firstRace">
+            <p>First Race:
+              <a class="btn btn-link" [href]="driverObject.firstRace['value']">
+                {{driverObject.firstRace['value'].substring(driverObject.firstRace['value'].lastIndexOf('/')+1)}}</a>
+            </p>
+          </span></strong>
+      </p>
+    </div>
+
+    <div class="media text-muted pt-3 ">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.lastRace">
+            <p>Last Race:
+              <a class="btn btn-link" [href]="driverObject.lastRace['value']">
+                {{driverObject.lastRace['value']
+          .substring(driverObject.lastRace['value'].lastIndexOf("/")+1)}}
+              </a></p>
+          </span></strong>
+      </p>
+    </div>
+
+    <div class="media text-muted pt-3 ">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.firstWin">
+            <p>First win:
+              <a class="btn btn-link" [href]="driverObject.firstWin['value']">
+                {{driverObject.firstWin['value']
+          .substring(driverObject.firstWin['value'].lastIndexOf("/")+1)}}
+              </a></p>
+          </span></strong>
+      </p>
+    </div>
+
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 medium lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark"><span *ngIf="driverObject.lastWin">
+            <p>Last win:
+              <a class="btn btn-link" [href]="driverObject.lastWin['value']">
+                {{driverObject.lastWin['value']
+          .substring(driverObject.lastWin['value'].lastIndexOf("/")+1)}}
+              </a></p>
+          </span></strong>
+      </p>
+    </div>
+    <span *ngIf="driverObject.subject"><a class="btn btn-primary btn-lg btn-block"
+        [href]="driverObject.subject['value']" target="_blank"><i class="fas fa-link"></i> &nbsp;DBpedia</a></span>
+  </div>
+</main>

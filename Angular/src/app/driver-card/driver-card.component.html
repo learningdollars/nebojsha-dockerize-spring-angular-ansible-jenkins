@@ -1,0 +1,33 @@
+<div class="card mb-4 mt-4" style="width: 18rem; min-height: 800px;">
+  <span *ngIf="driverObject.thumbnail">
+  <a  [href]="driverObject.thumbnail['value']"></a><img width="280px" height="360px"
+    style="overflow: hidden;" src="{{driverObject.thumbnail['value']}}" alt="Picture of driver" class="card-img-top" />
+  </span>
+  <span *ngIf="!driverObject.thumbnail" style="min-height: 360px;">
+  <img style="overflow: hidden;" class="card-img-top"
+       src="https://www.raconteur.net/wp-content/uploads/2018/04/shutterstock_762930772.jpg" alt="Picture of team" />
+  </span>
+  <div class="card-body">
+    <span *ngIf="driverObject.name">
+      <a [routerLink]="['/driverDetails/'+driverObject.name['value']]" queryParamsHandling="merge">
+        <h3 class="card-title" style="height: 80px;">{{driverObject.name['value']}}</h3>
+      </a></span>
+    <span *ngIf="driverObject.comment && !this.showMore">
+      <p class="card-text" style="min-height: 140px;">{{driverObject.comment['value'].substring(0,150)}} ...</p>
+      <p class="text-primary" style="cursor: pointer;" (click)="setShowMore(true)">Show More</p>
+    </span>
+
+    <span *ngIf="driverObject.comment && this.showMore">
+      <p class="card-text">{{driverObject.comment['value']}}</p>
+      <p class="text-primary" style="cursor: pointer;" (click)="setShowMore(false)">Show Less</p>
+    </span>
+
+    <br>
+    <span *ngIf="driverObject.points" class="float-bottom">
+      <p class="card-text"><b>Points: {{driverObject.points['value']}}</b></p>
+    </span>
+    <br>
+    <span *ngIf="driverObject.subject"><a class="btn btn-primary " [href]="driverObject.subject['value']"
+        target="_blank"> <i class="fas fa-link"></i> &nbsp;DBpedia</a></span>
+  </div>
+</div>

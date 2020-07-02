@@ -1,0 +1,2 @@
+azure-server ansible_host=40.121.219.111 ansible_port=22
+
